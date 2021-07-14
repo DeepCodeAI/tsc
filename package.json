@@ -39,6 +39,7 @@
     "@types/write": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
+    "@types/needle": "^2.5.2",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -61,12 +62,13 @@
     "@types/lodash.union": "^4.6.6",
     "@types/sarif": "^2.1.3",
     "@types/uuid": "^8.3.0",
-    "axios": "^0.21.1",
     "ignore": "^5.1.8",
+    "ipaddr.js": "^2.0.1",
     "lodash.chunk": "^4.2.0",
     "lodash.omit": "^4.5.0",
     "lodash.union": "^4.6.0",
     "multimatch": "^5.0.0",
+    "needle": "^2.8.0",
     "queue": "^6.0.1",
     "uuid": "^8.3.2"
   }

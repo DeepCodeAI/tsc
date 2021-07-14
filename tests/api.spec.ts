@@ -1,20 +1,21 @@
-import { baseURL, authHost, sessionToken, TEST_TIMEOUT } from './constants/base';
-import { bundleFiles, bundleFilesFull, bundleFilePaths } from './constants/sample';
-import { fromEntries } from '../src/lib/utils';
 import {
-  getFilters,
-  startSession,
+  AnalysisStatus,
+  checkBundle,
   checkSession,
   createBundle,
   createGitBundle,
-  checkBundle,
-  uploadFiles,
   extendBundle,
   getAnalysis,
-  AnalysisStatus,
+  getFilters,
+  getIpFamily,
   reportError,
   reportEvent,
+  startSession,
+  uploadFiles,
 } from '../src/http';
+import { fromEntries } from '../src/lib/utils';
+import { authHost, baseURL, sessionToken, TEST_TIMEOUT } from './constants/base';
+import { bundleFiles, bundleFilesFull } from './constants/sample';
 
 const fakeBundleId = 'c58d69bd4fd65c45b1112bd7b45f028e614d443fc123901fd1aba15856c13c27';
 let fakeBundleIdFull = '';
@@ -94,6 +95,8 @@ describe('Requests to public API', () => {
   });
 
   it('starts session successfully', async () => {
+    const ipFamily = await getIpFamily(authHost);
+
     const startSessionResponse = startSession({
       source: 'atom',
       authHost,
@@ -102,7 +105,7 @@ describe('Requests to public API', () => {
     const draftToken = startSessionResponse.draftToken;
 
     // This token is just a draft and not ready to be used permanently
-    const checkSessionResponse = await checkSession({ authHost, draftToken });
+    const checkSessionResponse = await checkSession({ authHost, draftToken, ipFamily });
     expect(checkSessionResponse.type).toEqual('success');
     if (checkSessionResponse.type == 'error') return;
     expect(checkSessionResponse.value).toEqual('');
